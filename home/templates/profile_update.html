@@ -1,0 +1,35 @@
+{% extends 'basehome.html' %}
+{% load bootstrap4 %}
+
+    {% block body %}
+
+    <!--div row  -->
+    <div class='row contentdiv'>
+         
+   
+                    <div class="container">
+                        <div class=" card width: 18rem;">
+                                    <h3 class="card-title justify-content-center">Edit Profile</h3>
+                                    <div class="col-10 mx-auto card-body">
+                                       
+                                            
+                                            <form method="POST"  >
+                                                {% csrf_token %}
+                                            
+                                                {% bootstrap_form profileform %}
+                                             
+                                                {% buttons %}
+                                                    
+                                                    <button class="boxed-btn3 w-100" type="submit">Save Update</button>
+                                                {% endbuttons %}
+                                            </form>
+                                        </div>
+                           </div>
+                 
+                        </div>
+               
+    </div>
+         
+
+    
+    {% endblock body %}	

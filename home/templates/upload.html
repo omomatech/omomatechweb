@@ -1,0 +1,44 @@
+{% extends 'basehome.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+           {% block body %}
+                <div class='row contentdiv'>
+                    <div class="col-5">
+                        <div class=" card width: 18rem;">
+                                   <div class='card-title justify-content-end"'>  
+                                     <h3 class="card-title justify-content-end"> Upload images</h3>
+                                    </div>
+                                    <div class="col-10 mx-auto card-body">
+                                            {% if form.errors %}
+                                                  {% for field in form %}
+                                                      {% for error in field.errors %} 
+                                                          <div class="alert alert-danger">
+                                                              <strong>{{ error|escape }}</strong>
+                                                          </div>
+                                                      {% endfor %}
+                                                  {% endfor %}
+                                            {% endif %} 
+                                            <form method="POST" enctype="multipart/form-data">
+                                                  {% csrf_token %}
+                                                  <input type="file" id="files" name="img_visiting" multiple  required  class="form-control"> 
+                                                  <button class="boxed-btn3 w-100" type="submit">uplaod Images</button>
+                                            </form>
+                                    </div>
+                        </div>
+                    </div>
+                    <div class='col-7'>
+                                <div class=" card width: 18rem;">
+                                     {% for imagesrc in img  %}
+                                          <div class="col-10 mx-auto card-body " >    
+                                              <a href='{{imagesrc.img_visiting}}'>  
+                                              <img src="{{imagesrc.img_visiting}}" class="img-fluid" onerror="this.onerror=null; this.src='{% static 'error1.png' %}'" alt="image"></a>
+                                              <a href='{% url 'home:deleteimage' unique_id=imagesrc.unique_id  %}'>   <button type="button" class="btn btn-danger">Delete</button>
+                                          </div>
+                                     {% endfor %}
+                                     
+                                     
+                                </div>
+                    </div>
+               </div>
+           {% endblock body %}	

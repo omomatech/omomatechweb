@@ -1,0 +1,96 @@
+{% extends 'basehome.html' %}
+{% load bootstrap4 %}
+
+    {% block body %}
+
+    <!--div row  -->
+    <div class='row contentdiv' id="hhh">
+         
+                                              <div class="col-4">                   
+												  	{% if form.errors %}
+												{% for key,value in form.errors.items%}
+														{% for item in value %}
+														   <p class="text-danger">  {{item}}</p>
+														{% endfor %}
+												{% endfor %}
+											{% endif %}
+                                                					
+																				<form method="POST"  enctype="multipart/form-data" id='formsnote' >
+																						{% csrf_token %}
+                                                                                        
+																						<div class="input-group mb-3">
+                                                                                                
+																								<div class="input-group-append">
+																							
+																								</div>
+																								<input type="text" name="notfication" placeholder="عنوان الموضوع" required class="form-control" required>
+																						</div>
+                                                                                        				<div class="input-group mb-2">
+																								<div class="input-group-append">
+																							
+																								</div>
+																								<textarea  form="formsnote" name="content_note" placeholder="الموصوع" style="text-overflow: ellipsis;" rows="10"class="form-control" required></textarea>
+																							
+																						</div>
+                                                                                        				<div class="input-group mb-2">
+																							
+                                                                                                
+																								<select required="required" class="form-control" name='category_note'>
+																									<option disabled='true' selected >اختار نوع الموضوع</option>
+																									{%for item in cat_items%}
+																									<option value={{item.category_name}}>{{item.category_name}}</option>
+																									{%endfor%}
+																								</select>
+																								</div>
+																					
+																						<div class="input-group mb-2">
+																								<div class="input-group-append">
+																							
+																								</div>
+																								   <input type="file" id="files" name="img_note"   placeholder="الصوره"  required  class="form-control"> 
+                                              
+																						</div>
+
+																						<div class="d-flex justify-content-center mt-3 login_container">
+																							
+																						      
+																						        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Add note">					
+																					  </div>
+																				</form>
+                                               </div>
+                                               	<div class="col-7">
+														<table class=" table table-striped table-sm">
+														  <thead>
+																<tr>
+																	
+																	<th scope="col">Notefications</th>
+                                                                    <th scope="col">category</th>
+                                                                 
+																
+																</tr>
+															</thead>
+															<tbody>
+																{%for visit in note%}
+																  <tr>
+																	   
+																
+																	   <td>{{visit.notfication}}</td>
+                                                                        <td>{{visit.category_note}}</td>
+												
+                                                                          <td>
+																	   <a class="btn btn-outline-success my-2 my-sm-0" href='{% url 'notifcation:delete_note' unique_id=visit.unique_id  %}'>Delete</a>
+											                           </td>
+																	
+                                                                       
+																	
+																	  </tr>
+																{% endfor%}
+															</tbody>
+														</table>
+												</div>
+               
+    </div>
+         
+
+    
+    {% endblock body %}	
