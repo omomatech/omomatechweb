@@ -18,10 +18,42 @@
 									
 												
 											 	
+																				
 										{% if m is not None %}
+										<script>
+											
+								     	window.onload=function () {
+
+											swal("تم اضافه المريض بنجاح", ' {{m.name}}  \n\n\n         {{m.password}} : الرقم السري \n\n\n {{m.username}} :  موبايل  ', "success"
+											
+											, {
+  buttons: {
+    cancel: "OK",
+    catch: {
+      text: "Print",
+      value: "catch",
+    },
+   
+  },
+})
+.then((value) => {
+  switch (value) {
+     case "catch":
+   newWin= window.open("",'height=400,width=600');
+   newWin.document.write('<center><h1>اجنة</h1></br></br></br></br></br><font size="6"><table border="1" width="400" 	height="400" cellpadding="5" id="printTable"><tbody><tr><th>#</th><th>value</th> </tr><tr><td>الاسم</td><td>{{m.name}}</td></tr><tr><td>رقم الهاتف</td><td>{{m.username}}</td></tr><tr><td>الرقم السري</td><td>{{m.password}}</td></tr></tbody></table></font></center>');  
+  newWin.print();
+   newWin.close();
+      break;
+    default:
+	   swal("تم اضافه المريض بنجاح");
 										
+  }
+});
+												
+										 }
+                                        </script>
 										 {% endif %}		
-											 						
+											 				
 										
 					
 										
@@ -106,7 +138,7 @@
 																	<th scope="col">Mobile</th>
 																	<th scope="col">Info</th>
 																	<th scope="col">Visits</th>
-																	<th scope="col">Print</th>
+																
 																</tr>
 															</thead>
 															<tbody>
@@ -121,9 +153,7 @@
 																	      <td>
 																<a class="btn btn-outline-success my-2 my-sm-0" href='{% url 'home:addvisiting' unique_id=pro.unique_id  %}'>Manage Visits</a>
 											                           </td>
-																	   <td>
-																		<a class="btn btn-outline-success my-2 my-sm-0" href='{% url 'home:print'  %}'>Print</a>
-																		   </td>
+																	 
 																	  </tr>
 																{% endfor%}
 															</tbody>
